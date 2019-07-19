@@ -23,8 +23,67 @@
 
 <body>
 
-    <p class="test">test</p>
-    <p class="test2">test 2</p>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 style="text-align: center">Train Scheduler</h1>
+            <h3 style="text-align: center">For best results, use while watching Slow TV's Bergen to Oslo train
+                documentary on Netflix.</h3>
+        </div>
+
+        <div class="card-body">
+
+            <h6>Current Train Schedule</h6>
+
+            <table class="table table-hover">
+
+                <thead>
+                    <th>Train Name</th>
+                    <th>Destination</th>
+                    <th>Frequency (min)</th>
+                    <th>Next Arrival</th>
+                    <th>Minutes Away</th>
+                </thead>
+
+                <tbody id="newTrain">
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <br>
+
+        <div class="card" id="submitTrain">
+
+            <form role="form">
+
+                <div class="form-group">
+                    <label for="newTrainName">Train Name</label>
+                    <input type="name" class="form-control" id="newTrainInfo">
+                </div>
+
+                <div class="form-group">
+                    <label for="newDestination">Destination</label>
+                    <input type="role" class="form-control" id="newDestinationInfo">
+                </div>
+
+                <div class="form-group">
+                    <label for="trainStartTime">First Train Time (HH:mm - military time)</label>
+                    <input type="startTime" class="form-control" id="newStartTime">
+                </div>
+
+                <div class="form-group">
+                    <label for="trainFrequency">Frequency (min)</label>
+                    <input type="frequency" class="form-control" id="newTrainFrequency">
+                </div>
+
+                <button type="submit" class="button btn-default" id="submit" type="submit">Submit</button>
+
+            </form>
+
+        </div>
+        
+    </div>
 
 </body>
 
