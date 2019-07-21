@@ -4,51 +4,31 @@ $(document).ready(function () {
     $("#submit").on("click", function (event) {
         event.preventDefault();
 
-        let userTrain = $("#newTrainInfo").val().trim();
-        let userDest = $("#newDestinationInfo").val().trim();
-        let userFreq = $("#newTrainFrequency").val().trim();
+        //variables
+        const userTrain = $("#newTrainInfo").val().trim();
+        const userDest = $("#newDestinationInfo").val().trim();
+        const userFreq = $("#newTrainFrequency").val().trim();
+        const userTime = $("#newStartTime").val().trim();
 
-        console.log(userTrain);
-        console.log(userDest);
-        console.log(userFreq);
+        //math
+        const userTimeConvert = moment(userTime, "HH:mm").subtract(1, "years");
+        const userTimeDiff = moment().diff(moment(userTimeConvert), "minutes");
+        const timeApart = userTimeDiff % userFreq;
+        const timeUntilTrain = userFreq - timeApart;
+        const nextTrain = moment().add(timeUntilTrain, "minutes");
+        const nextTrainVal = moment(nextTrain).format("hh:mm");
 
-        let userArrival = nextArrival();
-        let userMinutes = minutesAway();
-
-        let userInput = `
+        //template string
+        const userInput = `
         <tr>
             <td>${userTrain}</td>
             <td>${userDest}</td>
             <td>${userFreq}</td>
-            <td>${userArrival}</td>
-            <td>${userMinutes}</td>
+            <td>${nextTrainVal}</td>
+            <td>${timeUntilTrain}</td>
         </tr>
         `
-
         $("#newTrain").prepend(userInput);
     });
-
-    //calculates next arrival
-    let nextArrival = () => {
-
-        let userTime = $("#newStartTime").val().trim();
-
-        let userTimeVal = moment(userTime, "HHmm").format("HH:mm");
-
-        let currentTimeVal = moment().format("HH:mm");
-
-        console.log(userTimeVal.diff(moment(currentTimeVal, "HHmm"), "minutes"));
-        
-
-    }
-
-    //calculates minutes away
-    let minutesAway = () => {
-
-        console.log(moment().format('LT'))
-
-    }
-
-
 
 });
