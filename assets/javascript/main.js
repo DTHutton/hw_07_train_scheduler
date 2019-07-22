@@ -33,7 +33,7 @@ $(document).ready(function () {
         userTime = $("#newStartTime").val().trim();
 
         //push values to db
-        database.ref().set({
+        database.ref().push({
             userTrain,
             userDest,
             userFreq,
@@ -49,20 +49,20 @@ $(document).ready(function () {
         const nextTrainVal = moment(nextTrain).format("hh:mm");
 
         //template string
-        const userInput = `
-        <tr>
-            <td>${userTrain}</td>
-            <td>${userDest}</td>
-            <td>${userFreq}</td>
-            <td>${nextTrainVal}</td>
-            <td>${timeUntilTrain}</td>
-        </tr>
-        `
-        $("#newTrain").prepend(userInput);
+        // const userInput = `
+        // <tr>
+        //     <td>${userTrain}</td>
+        //     <td>${userDest}</td>
+        //     <td>${userFreq}</td>
+        //     <td>${nextTrainVal}</td>
+        //     <td>${timeUntilTrain}</td>  
+        // </tr>
+        // `
+        // $("#newTrain").prepend(userInput);
     });
 
     // firebase watcher
-    database.ref().on("value", function (snapshot) {
+    database.ref().on("child_added", function (snapshot) {
 
         // log snapshot
         console.log(snapshot.val());
