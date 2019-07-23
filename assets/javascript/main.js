@@ -46,19 +46,8 @@ $(document).ready(function () {
         const timeApart = userTimeDiff % userFreq;
         const timeUntilTrain = userFreq - timeApart;
         const nextTrain = moment().add(timeUntilTrain, "minutes");
-        const nextTrainVal = moment(nextTrain).format("hh:mm");
 
-        //template string
-        // const userInput = `
-        // <tr>
-        //     <td>${userTrain}</td>
-        //     <td>${userDest}</td>
-        //     <td>${userFreq}</td>
-        //     <td>${nextTrainVal}</td>
-        //     <td>${timeUntilTrain}</td>  
-        // </tr>
-        // `
-        // $("#newTrain").prepend(userInput);
+        $(".form-control").val("");
     });
 
     // firebase watcher
