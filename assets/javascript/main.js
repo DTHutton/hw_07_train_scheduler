@@ -26,28 +26,33 @@ $(document).ready(function () {
     $("#submit").on("click", function (event) {
         event.preventDefault();
 
-        //user values
-        userTrain = $("#newTrainInfo").val().trim();
-        userDest = $("#newDestinationInfo").val().trim();
-        userFreq = $("#newTrainFrequency").val().trim();
-        userTime = $("#newStartTime").val().trim();
+        if ($(".form-control").val() === "") {
+            alert("Please fill out all forms.");
+        } else {
 
-        //push values to db
-        database.ref().push({
-            userTrain,
-            userDest,
-            userFreq,
-            userTime
-        });
+            //user values
+            userTrain = $("#newTrainInfo").val().trim();
+            userDest = $("#newDestinationInfo").val().trim();
+            userFreq = $("#newTrainFrequency").val().trim();
+            userTime = $("#newStartTime").val().trim();
 
-        //math
-        const userTimeConvert = moment(userTime, "HH:mm").subtract(1, "years");
-        const userTimeDiff = moment().diff(moment(userTimeConvert), "minutes");
-        const timeApart = userTimeDiff % userFreq;
-        const timeUntilTrain = userFreq - timeApart;
-        const nextTrain = moment().add(timeUntilTrain, "minutes");
+            //push values to db
+            database.ref().push({
+                userTrain,
+                userDest,
+                userFreq,
+                userTime
+            });
 
-        $(".form-control").val("");
+            //math
+            const userTimeConvert = moment(userTime, "HH:mm").subtract(1, "years");
+            const userTimeDiff = moment().diff(moment(userTimeConvert), "minutes");
+            const timeApart = userTimeDiff % userFreq;
+            const timeUntilTrain = userFreq - timeApart;
+            const nextTrain = moment().add(timeUntilTrain, "minutes");
+
+            $(".form-control").val("");
+        }
     });
 
     // firebase watcher
